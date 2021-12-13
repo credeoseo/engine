@@ -1,0 +1,14 @@
+<section class="py-10 overflow-hidden">
+	<div class="container mx-auto">
+		<h2 class="block mb-6 text-3xl font-bold text-center text-gray-900 sm:text-4xl">Наши партнеры</h2>
+		<div class="h-20 overflow-visible swiper__company swiper lg:w-4/5 xl:w-3/5 lg:mx-auto">
+			<div class="swiper-wrapper">
+				{% for item in company %}
+				<div class="flex items-center justify-center w-auto swiper-slide">
+					<img class="object-contain h-full lozad" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ item.img }}" alt="item.name">
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</section>

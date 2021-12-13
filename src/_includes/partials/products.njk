@@ -1,0 +1,22 @@
+
+<section class="py-10">
+	<nav class="container mx-auto">
+		<ul class="grid gap-2 text-lg font-bold sm:grid-cols-2 lg:grid-cols-3 lg:w-4/5 xl:w-3/5 lg:mx-auto">
+			{% for item in collections.product %}
+			<li class="relative flex flex-col justify-between p-4 transition-colors rounded-lg odd:bg-themes-second hover:odd:bg-themes-default bg-themes-default hover:bg-themes-second">
+				<a class="mb-4 after:absolute after:inset-0" href="{{ item.url | url }}">
+					{{ item.data.anchor }}
+				</a>
+				{% if item.data.cardText %}
+				<span class="text-base font-normal">
+					{{ item.data.cardText }}
+				</span>	
+				{% endif %}
+				{% if item.data.img %}
+				<img class=" lozad" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ item.data.img }}" Alt="{{ item.data.anchor }}">
+				{% endif %}
+			</li>
+			{% endfor %}
+		</ul>
+	</nav>
+</section>

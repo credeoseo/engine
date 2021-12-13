@@ -1,0 +1,29 @@
+{% if benefits|length %}
+<section>
+	<div class="container mx-auto">
+		<div class="py-16 lg:py-20 lg:w-4/5 xl:w-3/5 lg:mx-auto">
+			<div class="max-w-xl mb-10 text-center md:mx-auto lg:max-w-2xl md:mb-12">
+				<h2 class="max-w-lg mx-auto mb-6 font-sans text-3xl leading-none tracking-tight text-gray-900 sm:text-4xl">
+					<span>
+						Почему <span class="font-bold">МЫ?</span>
+					</span>
+				</h2>
+				{#<p class="text-base text-gray-700 md:text-lg"></p>#}
+			</div>
+			<div class="grid gap-8 row-gap-8 lg:grid-cols-3">
+				{% for item in benefits %}
+				<div class="text-center">
+					<div class="flex items-center justify-center w-24 h-24 mx-auto mb-4 text-5xl font-extrabold rounded-full text-deep-purple-accent-400 bg-indigo-50 text-themes-default">
+					{{ loop.index }}
+					</div>
+					{#<h6 class="mb-2 font-semibold leading-5">{{ item.title }}</h6>#}
+					<p class="max-w-md mx-auto mb-3 text-xl font-semibold text-gray-900">
+						{{ item.content }}
+					</p>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</section>
+{% endif %}

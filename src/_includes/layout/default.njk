@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="{{ locale|default('ru') }}">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{ title }} - {{ envs.site.name }}</title>
+	<meta name="description" content="{{ description }}">
+	<link rel="canonical" href="{{ site.rootUrl }}{{ page.url }}">
+    <meta name="keywords" content="{{ keywords }}">
+	<link rel="icon" type="image/png" href="{{ envs.site.faviconUrl | url }}">
+	<link rel="stylesheet" type="text/css" href="{{ '/assets/main.css' | url }}"/>
+	<script src="//unpkg.com/alpinejs" defer></script>
+</head>
+<body class="grid min-h-screen grid-cols-[100%] grid-rows-[auto,1fr,auto]">
+	{% include './header.njk' %}
+	<main class="">
+		{{ content | safe }}
+	</main>
+	{% include './footer.njk' %}
+	<script src="{{ '/assets/main.js' | url }}"></script>
+	<script>
+		function contactForm() {
+			return {
+				{% if envs.site.credeoApi %}
+				formData: {
+					'broker_name': '{{ envs.site.name }}',
+					'name': '',
+					'phone': '',
+					'url': '{{ site.rootUrl }}{{ page.url }}',
+					'city': '{{ envs.site.city }}',
+					'utm_source': "{{ envs.site.name }} {{ envs.site.city }}"
+				},
+				{% else %}
+				formData: {
+					'BROKER_NAME': '{{ envs.site.name }}',
+					'DEPARTMENT': '{{ envs.site.department }}',
+					'NAME': '',
+					'WMid': '{{ envs.site.wmid }}',
+					'PHONE': '',
+					'FACTADDRESS': {
+						"CITY": "{{ envs.site.city }}"
+					}
+				},
+				{% endif %}
+				
+				message: '',
+				showMessage: false,
+				loading: false,
+				buttonLabel: 'Отправить',
+
+				submitData() {
+				this.buttonLabel = 'Отправка'
+				this.loading = true;
+				this.message = ''
+
+				fetch('{{ envs.site.api }}', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(this.formData)
+				})
+					.then(() => {
+						this.message = 'Форма отправлена, ожидайте!<br> С вами свяжутся'
+						this.$refs.form.reset()
+					})
+					.catch(() => {
+						this.message = 'Увы, но произошла ошибка попробуйте еще раз!'
+					})
+					.finally(() => {
+						this.showMessage = true,
+						this.loading = false;
+						this.buttonLabel = 'Отправлено'
+						setTimeout(() => {
+							this.buttonLabel = 'Отправить',
+							this.showMessage = false
+						}, 15000)
+					})
+				}
+			}
+		}
+	</script>
+	<script type="text/javascript" >
+	(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	ym(86852439, "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	});
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/86852439" style="position:absolute; left:-9999px;" alt="YM" /></div></noscript>
+</body>
+</html>

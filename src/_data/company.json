@@ -1,0 +1,38 @@
+[
+	{
+		"img": "https://cdn.open.ru/packs/media/src/front/images/logo/desktop/bank_black-c8b1092a477e1547bd4878fbb6aa116e.svg",
+		"name": "Открытие"
+	},
+	{
+		"img": "https://gett.com/wp-content/themes/gett/images/gett-logo.svg",
+		"name": "Gett"
+	},
+	{
+		"img": "https://credeo.ru/storage/logo.svg",
+		"name": "Credeo"
+	},
+	{
+		"img": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_alfa-bank.svg",
+		"name": "Альфа-банк"
+	},
+	{
+		"img": "https://upload.wikimedia.org/wikipedia/ru/8/86/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%A2%D0%B8%D0%BD%D1%8C%D0%BA%D0%BE%D1%84%D1%84.svg",
+		"name": "Тинькофф-банк"
+	},
+	{
+		"img": "https://a24.ru/img/logo.png",
+		"name": "24 автоклуб"
+	},
+	{
+		"img": "/images/carprice.svg",
+		"name": "CarPrice"
+	},
+	{
+		"img": "https://www.d2insur.ru/img/logo-color.svg",
+		"name": "D2 страхование"
+	},
+	{
+		"img": "https://www.vsk.ru/i/logo.svg",
+		"name": "ВСК страховой дом"
+	}
+]

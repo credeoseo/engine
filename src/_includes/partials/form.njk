@@ -1,0 +1,89 @@
+<section>
+	<div class="container mx-auto">
+		<div x-data="contactForm()" class="mx-auto exit-modal-whatsapp-content sm:grid sm:grid-cols-[repeat(2,auto)] sm:gap-x-8 sm:p-5 relative 2xs:max-w-xs sm:max-w-xl md:max-w-screen-sm lg:max-w-4xl xl:max-w-screen-lg bg-white rounded-3xl overflow-hidden">
+			<div class="bg-themes-second relative sm:order-2 sm:w-[280px] lg:w-[440px] xl:w-[480px] h-[150px] 2xs:h-60 sm:h-auto bg-contain bg-center pb-4.5 2xs:pb-7 flex justify-center items-end sm:items-center lg:justify-start lg:pl-6 bg-no-repeat rounded-3xl lozad" data-background-image="/images/girl.png">
+				<div x-show="showMessage" x-transition style="display: none;" class="absolute inset-0 flex items-center justify-center bg-center bg-no-repeat bg-contain pointer-events-none rounded-3xl bg-themes-second lozad exit-modal-whatsapp__success-img" data-background-image="/images/girl-call.png">
+				</div>
+			</div>
+			<div class="relative grid gap-3 my-3 px-5 sm:px-0 lg:pl-5 xl:pl-10 sm:order-1 2xs:mt-4.5 2xs:mb-8 sm:mb-5">
+				<div class="privacy">
+					<div class="max-w-lg mx-auto mb-3">
+						<p class="mb-3 text-2xl 2xs:text-3xl sm:text-4xl md:text-[50px]">Оставить заявку</p>
+						<p class="sm:text-lg lg:text-2xl">
+							Получите {% if productTitle %}{{ title }}{% else %}консультацию{% endif %} быстро и онлайн - <a class="font-semibold text-gray-600 hover:opacity-100 focus:opacity-100" rel="nofollow, noopener" href="https://wa.me/{{ envs.contacts.wa }}">напишите нам</a> в чат WhatsApp для получения реальных условий
+						</p>
+					</div>
+		
+				</div>
+				<form  x-ref="form" method="POST" action="{{ envs.site.api }}" @submit.prevent="submitData">
+					<div class="grid grid-rows-3 gap-2 2xs:gap-3.5 xl:gap-4.5">
+						<label class="relative grid group ">
+							<input
+							type="text"
+							placeholder="Имя"
+							{% if envs.site.credeoApi %}
+							x-model="formData.name"
+							{% else %}
+							x-model="formData.NAME"
+							{% endif %}
+							autocomplete="false"
+							class="w-full px-5 pt-8 pb-2 text-black placeholder-transparent transition-all bg-white outline-none appearance-none inputnew peer ring-inset ring-1 rounded-2xl focus:outline-none h-14 focus-visible:ring-themes-second hover:ring-black disabled:text-gray-500 disabled:hover:ring-gray-500 ring-gray-500"
+							required
+							>
+							<span class="absolute text-xs text-gray-600 transition-all pointer-events-none peer-focus-visible:text-themes-second peer-disabled:text-gray-500 peer-hover:text-black peer-placeholder-shown:text-base peer-placeholder-shown:top-7 top-3 peer-focus:top-3 peer-focus:text-xs peer-focus:translate-y-0 peer-placeholder-shown:-translate-y-1/2 inset-x-5 login-reg__placeholder">
+							<span class="absolute top-0 left-0 text-red-600 transition-opacity error empty:opacity-0 peer"></span>
+							<span class="transition-opacity opacity-0 peer-empty:opacity-100">
+								Имя
+													<span class="text-red-600">*</span>
+											</span>
+							</span>
+						</label>
+						<label class="relative grid group ">
+							<input
+							type="tel"
+							pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$"
+							{% if envs.site.credeoApi %}
+							x-model="formData.phone"
+							{% else %}
+							x-model="formData.PHONE"
+							{% endif %}
+							placeholder="Номер телефона"
+							autocomplete="false"
+							class="w-full px-5 pt-8 pb-2 text-black placeholder-transparent transition-all bg-white outline-none appearance-none inputnew peer ring-inset ring-1 rounded-2xl focus:outline-none h-14 focus-visible:ring-themes-second hover:ring-black disabled:text-gray-500 disabled:hover:ring-gray-500 ring-gray-500 phone-mask"
+							required
+							>
+							<span class="absolute text-xs text-gray-600 transition-all pointer-events-none peer-focus-visible:text-themes-second peer-disabled:text-gray-500 peer-hover:text-black peer-placeholder-shown:text-base peer-placeholder-shown:top-7 top-3 peer-focus:top-3 peer-focus:text-xs peer-focus:translate-y-0 peer-placeholder-shown:-translate-y-1/2 inset-x-5 login-reg__placeholder">
+							<span class="absolute top-0 left-0 text-red-600 transition-opacity error empty:opacity-0 peer"></span>
+							<span class="transition-opacity opacity-0 peer-empty:opacity-100">
+								Номер телефона
+													<span class="text-red-600">*</span>
+											</span>
+							</span>
+						</label>
+						<button
+							class="flex items-center justify-center w-full text-sm font-medium text-white transition-all rounded-full outline-none button-submit h-13 focus:outline-none bg-themes-default active:bg-themes-second disabled:bg-gray-500 exit-modal-whatsapp__button"
+							x-text="buttonLabel"
+							:disabled="loading"
+						>
+							Отправить
+						</button>
+					</div>
+					<div x-show="showMessage" class="absolute inset-0 flex items-center bg-white exit-modal-whatsapp__success-messages">
+						<div class="p-5 text-black">
+							<div class="mb-5 text-lg lg:text-2xl">
+								<p x-html="message"></p>
+							</div>
+							<button
+								type="button"
+								@click="showMessage = false"
+								class="flex items-center justify-center px-6 py-4 text-sm text-white transition rounded-full outline-none focus:outline-none h-13 bg-themes-default active:bg-themes-second " 
+							>
+								Закрыть
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>

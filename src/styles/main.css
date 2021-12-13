@@ -1,0 +1,4 @@
+@tailwind base;
+@import 'swiper/css';
+@tailwind components;
+@tailwind utilities;

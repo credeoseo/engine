@@ -1,0 +1,50 @@
+<section class="relative text-gray-600 body-font">
+	<form x-ref="form" action="{{ envs.site.api }}" method="post" class="container py-10 mx-auto" x-data="contactForm()" @submit.prevent="submitData">
+		<div class="flex flex-col w-full text-center">
+			<h2 class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">Обратный <span class="text-themes-default">звонок</span></h2>
+		</div>
+		<div class="mx-auto lg:w-1/2 md:w-2/3">
+			<div class="grid">
+				<div class="relative grid sm:grid-cols-2">
+					<div class="p-2">
+						<div class="relative">
+							<label for="name" class="text-sm leading-7 text-gray-600">Имя</label>
+							<input
+							type="text"
+							{% if envs.site.credeoApi %}
+							x-model="formData.name"
+							{% else %}
+							x-model="formData.NAME"
+							{% endif %}
+							class="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-themes-default focus:bg-white focus:ring-2 focus:ring-indigo-200">
+						</div>
+					</div>
+					<div class="p-2">
+						<div class="relative">
+							<label for="email" class="text-sm leading-7 text-gray-600">Телефон</label>
+							<input
+								type="tel"
+								pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$"
+								{% if envs.site.credeoApi %}
+								x-model="formData.phone"
+								{% else %}
+								x-model="formData.PHONE"
+								{% endif %}
+								class="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-themes-default focus:bg-white focus:ring-2 focus:ring-indigo-200">
+						</div>
+					</div>
+					<div class="absolute inset-0 flex items-center justify-center text-center bg-white" x-show="showMessage" x-transition style="display: non;">
+						<p x-html="message"></p>
+					</div>
+				</div>
+				<div class="w-full p-2">
+					<button
+						x-text="buttonLabel"
+						:disabled="loading"
+						class="flex px-8 py-2 mx-auto text-lg text-white transition-colors border-0 rounded bg-themes-default focus:outline-none hover:bg-themes-second"
+					>Отправить</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>
