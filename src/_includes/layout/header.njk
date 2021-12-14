@@ -1,14 +1,42 @@
 <header id="header" class="sticky top-0 z-10 w-full bg-gradient-to-b from-white via-white" x-data="{ openMenu: false }">
 	<div class="container py-5 mx-auto">
 		<div class="relative grid items-center grid-cols-2 lg:grid-cols-3 lg:w-4/5 xl:w-3/5 lg:mx-auto">
-			<ul class="items-center hidden space-x-8 lg:flex">
+			<ul class="items-center hidden space-x-4 lg:flex whitespace-nowrap">
 				{% for item in envs.menu %}
 				<li>
-					<a href="{{ item.link }}" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-themes-default">
+					<a href="{{ item.link }}" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-themes-default">
 						{{ item.title }}
 					</a>
 				</li>
 				{% endfor %}
+				{% if envs.site.cityList %}
+				<li class="relative" x-data="{ openCityList: false }">
+					<button class="text-gray-700 flex items-center font-medium hover:text-themes-default" @click="openCityList = !openCityList">
+						<span>{{ city }}</span>
+						<svg class="h-2 w-2 ml-1" viewBox="0 0 8 8" fill="none"><path d="M1.47 2.33h5.06a.5.5 0 0 1 .37.84L4.37 5.93a.5.5 0 0 1-.74 0L1.1 3.17a.5.5 0 0 1 .37-.84Z" fill="currentColor"/></svg>
+					</button>
+					<ul class="absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-lg p-2 opacity-0 invisible"
+						:class="{ 'opacity-0 invisible': !openCityList }"
+					>
+						{% if alias %}
+						<li>
+							<a href="{{ '/' | url }}" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-themes-default">
+								{{ envs.site.city }}
+							</a>
+						</li>
+						{% endif %}
+						{% for item in envs.site.cityList %}
+						{% if not '/' ~ alias ~ '/' in item.cityPath %}
+						<li>
+							<a href="{{ item.cityPath }}" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-themes-default">
+								{{ item.city }}
+							</a>
+						</li>
+						{% endif %}
+						{% endfor %}
+					</ul>
+				</li>
+				{% endif %}
 			</ul>
 			<a href="{{ '/' | url }}" aria-label="{{ envs.site.name }}" title="{{ envs.site.name }}" class="inline-flex items-center lg:mx-auto">
 				<img class="object-contain h-20 lozad" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ envs.site.logoUrl | url }}" Alt="{{ envs.site.name }}">
@@ -24,16 +52,16 @@
 			</ul>#}
 			<ul class="items-center hidden ml-auto space-x-8 lg:flex">
 				<li>
-					<a href="tel:{{ envs.contacts.phone }}" rel="noopener noreferrer" aria-label="{{ envs.contacts.phone }}" title="{{ envs.contacts.phone }}" class="inline-flex items-center font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-themes-default">
-						{{ envs.contacts.phone }}
+					<a href="tel:{{ phone }}" rel="noopener noreferrer" aria-label="{{ phone }}" title="{{ phone }}" class="inline-flex items-center font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-themes-default">
+						{{ phone }}
 					</a>
 				</li>
 				<li>
 				<a
-					href="https://wa.me/{{ envs.contacts.wa }}"
+					href="https://wa.me/{{ wa }}"
 					class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-themes-default hover:bg-themes-second focus:shadow-outline focus:outline-none"
-					aria-label="{{ envs.contacts.wa }}"
-					title="{{ envs.contacts.wa }}"
+					aria-label="{{ wa }}"
+					title="{{ wa }}"
 				>
 					<svg class="mr-2 h-7 w-7">
 						<use xlink:href="/images/icons.svg#whatsapp"></use>
@@ -87,16 +115,16 @@
 							</li>
 							{% endfor %}
 							<li>
-								<a href="tel:{{ envs.contacts.phone }}" rel="noopener noreferrer" aria-label="{{ envs.contacts.phone }}" title="{{ envs.contacts.phone }}" class="inline-flex items-center font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-themes-default">
-									{{ envs.contacts.phone }}
+								<a href="tel:{{ phone }}" rel="noopener noreferrer" aria-label="{{ phone }}" title="{{ phone }}" class="inline-flex items-center font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-themes-default">
+									{{ phone }}
 								</a>
 							</li>
 							<li>
 								<a
-									href="https://wa.me/{{ envs.contacts.wa }}"
+									href="https://wa.me/{{ wa }}"
 									class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-themes-default hover:bg-themes-second focus:shadow-outline focus:outline-none"
-									aria-label="{{ envs.contacts.wa }}"
-									title="{{ envs.contacts.wa }}"
+									aria-label="{{ wa }}"
+									title="{{ wa }}"
 								>
 									<svg class="mr-2 h-7 w-7">
 										<use xlink:href="/images/icons.svg#whatsapp"></use>
@@ -104,6 +132,34 @@
 									<span>WhatsApp</span>
 								</a>
 							</li>
+							{% if envs.site.cityList %}
+							<li class="relative" x-data="{ openCityList: false }">
+								<button class="text-gray-700 flex items-center font-medium hover:text-themes-default" @click="openCityList = !openCityList">
+									<span>{{ city }}</span>
+									<svg class="h-2 w-2 ml-1" viewBox="0 0 8 8" fill="none"><path d="M1.47 2.33h5.06a.5.5 0 0 1 .37.84L4.37 5.93a.5.5 0 0 1-.74 0L1.1 3.17a.5.5 0 0 1 .37-.84Z" fill="currentColor"/></svg>
+								</button>
+								<ul class="absolute top-full left-0 bg-white shadow-lg p-2 opacity-0 invisible"
+									:class="{ 'opacity-0 invisible': !openCityList }"
+								>
+									{% if alias %}
+									<li>
+										<a href="{{ '/' | url }}" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-themes-default">
+											{{ envs.site.city }}
+										</a>
+									</li>
+									{% endif %}
+									{% for item in envs.site.cityList %}
+									{% if not '/' ~ alias ~ '/' in item.cityPath %}
+									<li>
+										<a href="{{ item.cityPath }}" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-themes-default">
+											{{ item.city }}
+										</a>
+									</li>
+									{% endif %}
+									{% endfor %}
+								</ul>
+							</li>
+							{% endif %}
 						</ul>
 						</nav>
 					</div>

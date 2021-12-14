@@ -15,7 +15,7 @@
 			<p class="text-base font-bold tracking-wide text-gray-900">Контакты</p>
 			<div class="flex">
 				<p class="mr-1 text-gray-800">Телефон:</p>
-				<a href="tel:{{ envs.contacts.phone }}" aria-label="{{ envs.contacts.phone }}" title="{{ envs.contacts.phone }}" class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">{{ envs.contacts.phone }}</a>
+				<a href="tel:{{ phone }}" aria-label="{{ phone }}" title="{{ phone }}" class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">{{ phone }}</a>
 			</div>
 			<div class="flex">
 				<p class="mr-1 text-gray-800">Email:</p>
@@ -23,14 +23,28 @@
 			</div>
 			<div class="flex">
 				<p class="mr-1 text-gray-800">Адрес:</p>
-				{% if envs.contacts.mapLink %}
-				<a href="{{ envs.contacts.mapLink }}" target="_blank" rel="nofollow noopener noreferrer" aria-label="{{ envs.contacts.address }}" title="{{ envs.contacts.address }}" class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
-					{{ envs.contacts.address }}
-				</a>
+				{% if envs.site.addresses %}
+					{% for item in addresses %}
+						{% if item.mapLink %}
+						<a href="{{ item.mapLink }}" target="_blank" rel="nofollow noopener noreferrer" aria-label="{{ item.address }}" title="{{ item.address }}" class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
+							{{ item.address }}
+						</a>
+						{% else %}
+						<span class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
+							{{ item.address }}
+						</span>
+						{% endif %}
+					{% endfor %}
 				{% else %}
-				<span class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
-					{{ envs.contacts.address }}
-				</span>
+					{% if mapLink %}
+					<a href="{{ mapLink }}" target="_blank" rel="nofollow noopener noreferrer" aria-label="{{ address }}" title="{{ address }}" class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
+						{{ address }}
+					</a>
+					{% else %}
+					<span class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
+						{{ address }}
+					</span>
+					{% endif %}
 				{% endif %}
 			</div>
 		</div>

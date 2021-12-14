@@ -1,3 +1,16 @@
+{% if alias %}
+	{% set city = city %}
+	{% set phone = phone %}
+	{% set wa = wa %}
+	{% set address = address %}
+	{% set mapLink = mapLink %}
+{% else %}
+	{% set city = envs.site.city %}
+	{% set phone = envs.contacts.phone %}
+	{% set wa = envs.contacts.wa %}
+	{% set address = envs.contacts.address %}
+	{% set mapLink = envs.contacts.mapLink %}
+{% endif %}
 <!DOCTYPE html>
 <html lang="{{ locale|default('ru') }}">
 <head>
@@ -28,8 +41,8 @@
 					'name': '',
 					'phone': '',
 					'url': '{{ site.rootUrl }}{{ page.url }}',
-					'city': '{{ envs.site.city }}',
-					'utm_source': "{{ envs.site.name }} {{ envs.site.city }}"
+					'city': '{{ city }}',
+					'utm_source': "{{ envs.site.name }} {{ city }}"
 				},
 				{% else %}
 				formData: {
@@ -39,11 +52,11 @@
 					'WMid': '{{ envs.site.wmid }}',
 					'PHONE': '',
 					'FACTADDRESS': {
-						"CITY": "{{ envs.site.city }}"
+						"CITY": "{{ city }}"
 					}
 				},
 				{% endif %}
-				
+
 				message: '',
 				showMessage: false,
 				loading: false,
