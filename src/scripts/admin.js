@@ -32,14 +32,21 @@ export default new class  {
 				"widget": "string"
 			},
 			{
-				"label": "Адрес",
-				"name": "address",
-				"widget": "string"
-			},
-			{
-				"label": "Карта",
-				"name": "mapLink",
-				"widget": "string"
+				"name": "addresses",
+				"label": "Адреса",
+				"widget" : "list",
+				"fields": [
+					{
+						"label": "Адрес",
+						"name": "address",
+						"widget": "string"
+					},
+					{
+						"label": "Карта",
+						"name": "mapLink",
+						"widget": "string"
+					}
+				]
 			}
 		]
 	}

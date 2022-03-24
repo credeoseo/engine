@@ -37,17 +37,6 @@
 							{% endif %}
 						{% endfor %}
 					</div>
-				{% else %}
-					<p class="mr-1 text-gray-800">Адрес:</p>
-					{% if mapLink %}
-					<a href="{{ mapLink }}" target="_blank" rel="nofollow noopener noreferrer" aria-label="{{ address }}" title="{{ address }}" class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
-						{{ address }}
-					</a>
-					{% else %}
-					<span class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
-						{{ address }}
-					</span>
-					{% endif %}
 				{% endif %}
 			</div>
 		</div>
