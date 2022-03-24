@@ -7,10 +7,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-  entry: './src/scripts/main.js',
+  entry: {
+	main: './src/scripts/main.js',
+	admin: './src/scripts/admin.js'
+  },
   output: {
-    path: path.resolve(__dirname, '_site/assets'),
-    filename: 'main.js'
+    path: path.resolve(__dirname, '_site/assets')
   },
   plugins: [
     new MiniCssExtractPlugin(),
