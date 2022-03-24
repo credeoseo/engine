@@ -1,9 +1,13 @@
 {% if alias %}
-	{% set city = city %}
-	{% set phone = phone %}
-	{% set wa = wa %}
-	{% set addresses = addresses %}
-	{% set mapLink = mapLink %}
+	{% for item in envs.contacts.aliases %}
+		{% if item.alias == alias %}
+			{% set city = item.city %}
+			{% set phone = item.phone %}
+			{% set wa = item.wa %}
+			{% set addresses = item.addresses %}
+			{% set mapLink = item.mapLink %}
+		{% endif %}
+	{% endfor %}
 {% else %}
 	{% set city = envs.site.city %}
 	{% set phone = envs.contacts.phone %}
