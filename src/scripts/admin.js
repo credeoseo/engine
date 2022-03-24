@@ -10,31 +10,37 @@ export default new class  {
 	const phone = {
 		"label": "Телефон",
 		"name": "phone",
+		"required": false,
 		"widget": "string"
 	}
 	const mail = {
 		"label": "Почта",
 		"name": "mail",
+		"required": false,
 		"widget": "string"
 	}
 	const wa = {
 		"label": "WhatsApp",
 		"name": "wa",
+		"required": false,
 		"widget": "string"
 	}
 	const addresses = {
 		"name": "addresses",
 		"label": "Адреса",
 		"widget" : "list",
+		"required": false,
 		"fields": [
 			{
 				"label": "Адрес",
 				"name": "address",
+				"required": false,
 				"widget": "string"
 			},
 			{
 				"label": "Карта",
 				"name": "mapLink",
+				"required": false,
 				"widget": "string"
 			}
 		]
@@ -82,36 +88,43 @@ export default new class  {
 			{
 				"name": "name",
 				"label": "Название",
+				"required": false,
 				"widget": "string"
 			},
 			{
 				"name": "logoUrl",
 				"label": "Логотип",
+				"required": false,
 				"widget": "image"
 			},
 			{
 				"name": "faviconUrl",
 				"label": "Фавиконка",
+				"required": false,
 				"widget": "image"
 			},
 			{
 				"name": "department",
 				"label": "Отдел",
+				"required": false,
 				"widget": "string"
 			},
 			{
 				"name": "wmid",
 				"label": "WMID",
+				"required": false,
 				"widget": "string"
 			},
 			{
 				"name": "city",
 				"label": "Город",
+				"required": false,
 				"widget": "string"
 			},
 			{
 				"name": "api",
 				"label": "Ссылка на API",
+				"required": false,
 				"widget": "string"
 			},
 			{
@@ -123,11 +136,13 @@ export default new class  {
 			{
 				"name": "source_id",
 				"label": "Источник",
+				"required": false,
 				"widget": "string"
 			},
 			{
 				"name": "broker_id",
 				"label": "Брокер",
+				"required": false,
 				"widget": "string"
 			},
 		]
