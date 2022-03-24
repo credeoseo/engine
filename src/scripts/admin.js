@@ -1,5 +1,5 @@
 import CMS from 'netlify-cms'
-import { repoName, alias } from '/src/theme/admin.js'
+import { repoName } from '/src/theme/admin.js'
 
 export default new class  {
   constructor() {
@@ -7,6 +7,38 @@ export default new class  {
   }
 
   handler() {
+	const phone = {
+		"label": "Телефон",
+		"name": "phone",
+		"widget": "string"
+	}
+	const mail = {
+		"label": "Почта",
+		"name": "mail",
+		"widget": "string"
+	}
+	const wa = {
+		"label": "WhatsApp",
+		"name": "wa",
+		"widget": "string"
+	}
+	const addresses = {
+		"name": "addresses",
+		"label": "Адреса",
+		"widget" : "list",
+		"fields": [
+			{
+				"label": "Адрес",
+				"name": "address",
+				"widget": "string"
+			},
+			{
+				"label": "Карта",
+				"name": "mapLink",
+				"widget": "string"
+			}
+		]
+	}
 	const contacts = {
 		"name": "index",
 		"label": "Контактная информация",
@@ -16,36 +48,24 @@ export default new class  {
 			"preview": false,
 		},
 		"fields": [
+			phone,
+			mail,
+			wa,
+			addresses,
 			{
-				"label": "Телефон",
-				"name": "phone",
-				"widget": "string"
-			},
-			{
-				"label": "Почта",
-				"name": "mail",
-				"widget": "string"
-			},
-			{
-				"label": "WhatsApp",
-				"name": "wa",
-				"widget": "string"
-			},
-			{
-				"name": "addresses",
-				"label": "Адреса",
-				"widget" : "list",
+				"name": "aliases",
+				"widget": "list",
+				"required": false,
 				"fields": [
 					{
-						"label": "Адрес",
-						"name": "address",
+						"name": "alias",
+						"label": "Алиас",
 						"widget": "string"
 					},
-					{
-						"label": "Карта",
-						"name": "mapLink",
-						"widget": "string"
-					}
+					phone,
+					mail,
+					wa,
+					addresses,
 				]
 			}
 		]
@@ -109,14 +129,8 @@ export default new class  {
 				"name": "broker_id",
 				"label": "Брокер",
 				"widget": "string"
-			}
+			},
 		]
-	}
-	let data
-	if(alias) {
-		data = [contacts, settings, alias]
-	} else {
-		data = [contacts, settings]
 	}
 
 	const config = {
@@ -132,7 +146,10 @@ export default new class  {
 			{
 				"label": 'Данные',
 				"name": 'lists',
-				"files": data
+				"files": [
+					contacts,
+					settings
+				]
 			}
 		]
 	}
