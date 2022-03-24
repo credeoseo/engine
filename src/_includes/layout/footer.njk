@@ -22,10 +22,10 @@
 				<a href="mailto:{{ envs.contacts.mail }}" aria-label="{{ envs.contacts.mail }}" title="{{ envs.contacts.mail }}" class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">{{ envs.contacts.mail }}</a>
 			</div>
 			<div class="flex">
-				{% if envs.contacts.addresses %}
+				{% if addresses %}
 					<p class="mr-1 text-gray-800">Адреса:</p>
 					<div class="grid gap-y-2">
-						{% for item in envs.contacts.addresses %}
+						{% for item in addresses %}
 							{% if item.mapLink %}
 							<a href="{{ item.mapLink }}" target="_blank" rel="nofollow noopener noreferrer" aria-label="{{ item.address }}" title="{{ item.address }}" class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
 								{{ item.address }}

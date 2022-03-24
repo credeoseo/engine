@@ -2,13 +2,13 @@
 	{% set city = city %}
 	{% set phone = phone %}
 	{% set wa = wa %}
-	{% set address = address %}
+	{% set addresses = addresses %}
 	{% set mapLink = mapLink %}
 {% else %}
 	{% set city = envs.site.city %}
 	{% set phone = envs.contacts.phone %}
 	{% set wa = envs.contacts.wa %}
-	{% set address = envs.contacts.address %}
+	{% set addresses = envs.contacts.addresses %}
 	{% set mapLink = envs.contacts.mapLink %}
 {% endif %}
 <!DOCTYPE html>
