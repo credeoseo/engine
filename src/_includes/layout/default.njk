@@ -1,20 +1,15 @@
-{% if alias %}
-	{% for item in envs.contacts.aliases %}
-		{% if item.alias == alias %}
-			{% set city = item.city %}
-			{% set phone = item.phone %}
-			{% set wa = item.wa %}
-			{% set addresses = item.addresses %}
-			{% set mapLink = item.mapLink %}
-		{% endif %}
-	{% endfor %}
-{% else %}
-	{% set city = envs.site.city %}
-	{% set phone = envs.contacts.phone %}
-	{% set wa = envs.contacts.wa %}
-	{% set addresses = envs.contacts.addresses %}
-	{% set mapLink = envs.contacts.mapLink %}
-{% endif %}
+{% for item in envs.contacts.aliases if envs.contacts.aliases else range(0, 1) %}
+	{% if alias == item.alias %}
+		{% set city = item.city %}
+		{% set phone = item.phone %}
+		{% set wa = item.wa %}
+		{% set addresses = item.addresses %}
+	{% else %}
+		{% set city = envs.site.city %}
+		{% set phone = envs.contacts.phone %}
+		{% set wa = envs.contacts.wa %}
+		{% set addresses = envs.contacts.addresses %}
+	{% endif %}
 <!DOCTYPE html>
 <html lang="{{ locale|default('ru') }}">
 <head>
@@ -115,3 +110,4 @@
 	<noscript><div><img src="https://mc.yandex.ru/watch/86852439" style="position:absolute; left:-9999px;" alt="YM" /></div></noscript>
 </body>
 </html>
+{% endfor %}
