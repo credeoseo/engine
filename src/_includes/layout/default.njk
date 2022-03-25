@@ -1,4 +1,4 @@
-{% for item in envs.contacts.aliases if envs.contacts.aliases else range(0, 1) %}
+{% for item in envs.contacts.aliases if alias != null else range(0, 1) %}
 	{% if alias == item.alias %}
 		{% set city = item.city %}
 		{% set phone = item.phone %}
@@ -10,6 +10,7 @@
 		{% set wa = envs.contacts.wa %}
 		{% set addresses = envs.contacts.addresses %}
 	{% endif %}
+{% if alias == item.alias or alias == null %}
 <!DOCTYPE html>
 <html lang="{{ locale|default('ru') }}">
 <head>
@@ -110,4 +111,5 @@
 	<noscript><div><img src="https://mc.yandex.ru/watch/86852439" style="position:absolute; left:-9999px;" alt="YM" /></div></noscript>
 </body>
 </html>
+{% endif %}
 {% endfor %}
