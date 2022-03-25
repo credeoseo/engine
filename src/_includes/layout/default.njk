@@ -1,14 +1,14 @@
 {% for item in envs.contacts.aliases if alias != null else range(0, 1) %}
-	{% if alias == item.alias %}
-		{% set city = item.city %}
-		{% set phone = item.phone %}
-		{% set wa = item.wa %}
-		{% set addresses = item.addresses %}
-	{% else %}
+	{% if alias == null %}
 		{% set city = envs.site.city %}
 		{% set phone = envs.contacts.phone %}
 		{% set wa = envs.contacts.wa %}
 		{% set addresses = envs.contacts.addresses %}
+	{% else %}
+		{% set city = item.city %}
+		{% set phone = item.phone %}
+		{% set wa = item.wa %}
+		{% set addresses = item.addresses %}
 	{% endif %}
 {% if alias == item.alias or alias == null %}
 <!DOCTYPE html>
