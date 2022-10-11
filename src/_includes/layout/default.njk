@@ -63,35 +63,55 @@
 				showMessage: false,
 				loading: false,
 				buttonLabel: 'Отправить',
+				utms: {},
+				init() {
+					let url = window.location;
+					url = new URL(url);
 
+					let utms = [
+						'utm_campaign',
+						'utm_content',
+						'utm_medium',
+						'utm_source',
+						'utm_term',
+						'yandex-source'
+					]
+					utms.forEach(utm => {
+						let param = sessionStorage.getItem(utm) || url.searchParams.get(utm)
+						if(param) {
+							sessionStorage.setItem(utm, param)
+							this.formData[utm] = param
+						}
+					})
+				},
 				submitData() {
-				this.buttonLabel = 'Отправка'
-				this.loading = true;
-				this.message = ''
+					this.buttonLabel = 'Отправка'
+					this.loading = true;
+					this.message = ''
 
-				fetch('{{ envs.site.api }}', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify(this.formData)
-				})
-					.then(() => {
-						this.message = 'Форма отправлена, ожидайте!<br> С вами свяжутся'
-						this.$refs.form.reset()
+					fetch('{{ envs.site.api }}', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(this.formData)
 					})
-					.catch(() => {
-						this.message = 'Увы, но произошла ошибка попробуйте еще раз!'
-					})
-					.finally(() => {
-						this.showMessage = true,
-						this.loading = false;
-						this.buttonLabel = 'Отправлено'
-						setTimeout(() => {
-							this.buttonLabel = 'Отправить',
-							this.showMessage = false
-						}, 15000)
-					})
+						.then(() => {
+							this.message = 'Форма отправлена, ожидайте!<br> С вами свяжутся'
+							this.$refs.form.reset()
+						})
+						.catch(() => {
+							this.message = 'Увы, но произошла ошибка попробуйте еще раз!'
+						})
+						.finally(() => {
+							this.showMessage = true,
+							this.loading = false;
+							this.buttonLabel = 'Отправлено'
+							setTimeout(() => {
+								this.buttonLabel = 'Отправить',
+								this.showMessage = false
+							}, 15000)
+						})
 				}
 			}
 		}
