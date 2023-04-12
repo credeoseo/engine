@@ -5,4 +5,8 @@ eleventyExcludeFromCollections: true
 Sitemap: {{ site.rootUrl }}/sitemap.xml
 
 User-agent: *
-Disallow:
+{% if noIndex.length %}
+	{% for item in noIndex %}
+ 		Disallow: {{ item }}
+	{% endfor %}
+{% endif %}
